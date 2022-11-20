@@ -64,62 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#cantidad").focus();
         }
     })
-
-    $('#btn_generar').click(function (e) {
-        e.preventDefault();
-        var rows = $('#tblDetalle tr').length;
-        if (rows > 2) {
-            var action = 'procesarVenta';
-            var id = $('#idcliente').val();
-            $.ajax({
-                url: 'ajax.php',
-                async: true,
-                data: {
-                    procesarVenta: action,
-                    id: id
-                },
-                success: function (response) {
-
-                    const res = JSON.parse(response);
-                    if (response != 'error') {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Venta Generada',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                        setTimeout(() => {
-                            generarPDF(res.id_cliente, res.id_venta);
-                            location.reload();
-                        }, 300);
-                    } else {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: 'Error al generar la venta',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    }
-                },
-                error: function (error) {
-
-                }
-            });
-        } else {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'warning',
-                title: 'No hay producto para generar la venta',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
-    });
-    if (document.getElementById("detalle_venta")) {
-        listar();
-    }
 })
 
 function calcularPrecio(e) {
@@ -331,11 +275,6 @@ function calcular() {
     var filas = document.querySelectorAll("#tblDetalle tfoot tr td");
     filas[1].textContent = total.toFixed(2);
 }
-
-function generarPDF(cliente, id_venta) {
-    url = 'pdf/generar.php?cl=' + cliente + '&v=' + id_venta;
-    window.open(url, '_blank');
-}
 if (document.getElementById("stockMinimo")) {
     const action = "sales";
     $.ajax({
@@ -455,7 +394,7 @@ function btnCambiar(e) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error al modificar la contraseña',
+                        title: 'Error al Actualizar la contraseña',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -481,7 +420,7 @@ function editarCliente(id) {
             $('#telefono').val(datos.telefono);
             $('#direccion').val(datos.direccion);
             $('#id').val(datos.idcliente);
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
@@ -506,7 +445,7 @@ function editarUsuario(id) {
             $('#usuario').val(datos.usuario);
             $('#correo').val(datos.correo);
             $('#id').val(datos.idusuario);
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
@@ -541,7 +480,7 @@ function editarProducto(id) {
             }else{
                 $("#accion").prop("checked", false);
             }
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
@@ -569,7 +508,7 @@ function editarTipo(id) {
             const datos = JSON.parse(response);
             $('#nombre').val(datos.tipo);
             $('#id').val(datos.id);
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
@@ -592,7 +531,7 @@ function editarPresent(id) {
             $('#nombre').val(datos.nombre);
             $('#nombre_corto').val(datos.nombre_corto);
             $('#id').val(datos.id);
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
@@ -615,7 +554,7 @@ function editarLab(id) {
             $('#sede').val(datos.sede);
             $('#direccion').val(datos.direccion);
             $('#id').val(datos.id);
-            $('#btnAccion').val('Modificar');
+            $('#btnAccion').val('Actualizar');
         },
         error: function (error) {
             console.log(error);
