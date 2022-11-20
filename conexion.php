@@ -1,5 +1,5 @@
 <?php
-$host = 'sisinventario.mysql.database.azure.com';
+$host = 'localhost';
 $username = 'inventarad';
 $password = 'sisin00*';
 $db_name = 'inventario_1';
