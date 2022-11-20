@@ -1,15 +1,12 @@
 <?php
-$host = 'sisinventario.mysql.database.azure.com';
-$username = 'inventarad';
-$password = 'sisin00*';
-$db_name = 'inventario_1';
-
-$conexion = mysqli_init();
-mysqli_ssl_set($conexion,NULL,NULL, "./DigiCertGlobalRootG2.crt.pem", NULL, NULL);
-mysqli_real_connect($conexion, "sisinventario.mysql.database.azure.com", "inventarad", "sisin00*", "inventario_1", 3306, MYSQLI_CLIENT_SSL);
-//If connection failed, show the error
-if (mysqli_connect_errno())
-{
-    die('Failed to connect to MySQL: '.mysqli_connect_error());
-}
-?>
+    $host = "sisinventario.mysql.database.azure.com";
+    $user = "inventarad";
+    $clave = "sisin00*";
+    $bd = "inventario_1";
+    $conexion = mysqli_connect($host,$user,$clave,$bd);
+    if (mysqli_connect_errno()){
+        echo "No se pudo conectar a la base de datos";
+        exit();
+    }
+    mysqli_select_db($conexion,$bd) or die("No se encuentra la base de datos");
+    mysqli_set_charset($conexion,"utf8");
